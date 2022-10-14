@@ -26,6 +26,19 @@ const routes = [
   },
 
   {
+    path: "/verify",
+    component: () => import("layouts/NoLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "verify",
+        component: () =>
+          import("src/pages/AccountCreation/VerificationPage.vue"),
+      },
+    ],
+  },
+
+  {
     path: "/terms",
     component: () => import("layouts/NoLayout.vue"),
     children: [
@@ -64,6 +77,35 @@ const routes = [
     ],
   },
   // END - Authentication Pages
+
+  // BEGIN - Account Recovery Pages
+  {
+    path: "/forgot-password",
+    component: () => import("layouts/NoLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "forgot-password",
+        component: () =>
+          import("src/pages/AccountRecovery/ForgotPasswordPage.vue"),
+      },
+    ],
+  },
+  // END - Account Recovery Pages
+
+  // BEGIN - Tracker Pages
+  {
+    path: "/tracker/home",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-home",
+        component: () => import("src/pages/Tracker/HomePage.vue"),
+      },
+    ],
+  },
+  // END - Tracker Pages
 
   // Always leave this as last one,
   // but you can also remove it
