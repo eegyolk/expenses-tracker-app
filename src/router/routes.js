@@ -26,12 +26,12 @@ const routes = [
   },
 
   {
-    path: "/verify",
+    path: "/verify-account",
     component: () => import("layouts/NoLayout.vue"),
     children: [
       {
         path: "",
-        name: "verify",
+        name: "verify-account",
         component: () =>
           import("src/pages/AccountCreation/VerificationPage.vue"),
       },
@@ -88,6 +88,32 @@ const routes = [
         name: "forgot-password",
         component: () =>
           import("src/pages/AccountRecovery/ForgotPasswordPage.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/verify-reset",
+    component: () => import("layouts/NoLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "verify-reset",
+        component: () =>
+          import("src/pages/AccountRecovery/VerificationPage.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/reset-password",
+    component: () => import("layouts/NoLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "reset-password",
+        component: () =>
+          import("src/pages/AccountRecovery/ResetPasswordPage.vue"),
       },
     ],
   },
