@@ -136,6 +136,7 @@ export default defineComponent({
     const acceptTOSAndPP = ref(false);
 
     const router = useRouter();
+
     return {
       fullName,
       emailAddress,

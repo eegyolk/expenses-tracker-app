@@ -91,6 +91,7 @@
 
 <script>
 import { defineComponent, ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "VerificationPage",
@@ -104,6 +105,8 @@ export default defineComponent({
     const codePart2 = ref("");
     const codePart3 = ref("");
     const codePart4 = ref("");
+
+    const router = useRouter();
 
     onMounted(() => {
       codePart1Ref.value.focus();
@@ -151,7 +154,7 @@ export default defineComponent({
       },
 
       onVerifyAccount() {
-        // TODO: route to authenticated home page
+        router.push({ name: "tracker-home" });
       },
     };
   },
