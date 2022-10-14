@@ -171,6 +171,70 @@ const routes = [
       },
     ],
   },
+
+  {
+    path: "/tracker/income",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-income",
+        component: () => import("src/pages/Tracker/IncomePage.vue"),
+        meta: {
+          title: "Income",
+          withBackButton: false,
+        },
+      },
+    ],
+  },
+
+  {
+    path: "/tracker/expenses",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-expenses",
+        component: () => import("src/pages/Tracker/ExpensesPage.vue"),
+        meta: {
+          title: "Expenses",
+          withBackButton: false,
+        },
+      },
+    ],
+  },
+
+  {
+    path: "/tracker/savings",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-savings",
+        component: () => import("src/pages/Tracker/SavingsPage.vue"),
+        meta: {
+          title: "Savings",
+          withBackButton: false,
+        },
+      },
+    ],
+  },
+
+  {
+    path: "/tracker/profile",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-profile",
+        component: () => import("src/pages/Tracker/ProfilePage.vue"),
+        meta: {
+          title: "Profile",
+          withBackButton: false,
+        },
+      },
+    ],
+  },
   // END - Tracker Pages
 
   // Always leave this as last one,
