@@ -24,26 +24,70 @@
 
     <q-footer bordered class="bg-deep-purple-13">
       <q-tabs
-        no-caps
         active-color="white"
         indicator-color="transparent"
         class="text-grey"
         v-model="selectedTab"
         dense
+        no-caps
       >
-        <q-tab name="home" icon="home" label="Home" />
-        <q-tab name="income" icon="account_balance_wallet" label="Income" />
-        <q-tab name="expenses" icon="shopping_cart" label="Expenses" />
-        <q-tab name="savings" icon="savings" label="Savings" />
-        <q-tab
-          v-if="hasUnreadMessag"
+        <q-route-tab
+          name="home"
+          icon="home"
+          label="Home"
+          to="/tracker/home"
+          content-class=""
+          exact
+          replace
+        />
+
+        <q-route-tab
+          name="income"
+          icon="account_balance_wallet"
+          label="Income"
+          to="/tracker/income"
+          exact
+          replace
+        />
+
+        <q-route-tab
+          name="expenses"
+          icon="shopping_cart"
+          label="Expenses"
+          to="/tracker/expenses"
+          exact
+          replace
+        />
+        <q-route-tab
+          name="savings"
+          icon="savings"
+          label="Savings"
+          to="/tracker/savings"
+          exact
+          replace
+        />
+
+        <q-route-tab
+          v-if="hasUnreadMessages"
           name="profile"
           icon="account_circle"
           label="Profile"
           alert="red"
           alert-icon="mark_unread_chat_alt"
+          to="/tracker/profile"
+          exact
+          replace
         />
-        <q-tab v-else name="profile" icon="account_circle" label="Profile" />
+
+        <q-route-tab
+          v-else
+          name="profile"
+          icon="account_circle"
+          label="Profile"
+          to="/tracker/profile"
+          exact
+          replace
+        />
       </q-tabs>
     </q-footer>
 
@@ -72,7 +116,8 @@ export default defineComponent({
       return router.currentRoute.value.meta.title;
     });
 
-    const hasUnreadMessag = computed(() => {
+    const hasUnreadMessages = computed(() => {
+      // TODO:: get the unread messages
       return Math.floor(Math.random() * 10) % 2 === 0;
     });
 
@@ -80,7 +125,7 @@ export default defineComponent({
       selectedTab,
       backButtonVisibility,
       getTitle,
-      hasUnreadMessag,
+      hasUnreadMessages,
 
       onBack() {
         router.back();
