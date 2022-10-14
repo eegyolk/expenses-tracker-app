@@ -149,7 +149,7 @@ export default defineComponent({
       },
 
       onRegister() {
-        router.push({ name: "verify" });
+        router.push({ name: "verify-account" });
       },
     };
   },
