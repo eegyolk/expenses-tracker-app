@@ -9,7 +9,7 @@
       </q-card-section>
 
       <q-card-section>
-        <div class="text-h6 text-center q-pt-lg">Home</div>
+        <div class="text-h6 text-center q-pt-lg">Savings</div>
       </q-card-section>
     </q-card>
   </q-page>
@@ -19,7 +19,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HomePage",
+  name: "SavingsPage",
 });
 </script>
 
