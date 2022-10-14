@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header class="bg-deep-purple-13" elevated>
       <q-toolbar>
         <q-btn
           flat
@@ -11,15 +11,22 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-space />
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="q-gutter-md">
+          <q-btn flat color="white" round icon="notifications">
+            <q-badge color="red" floating rounded="">22</q-badge>
+          </q-btn>
+          <q-avatar size="40px">
+            <img :src="`https://cdn.quasar.dev/img/avatar1.jpg`" />
+          </q-avatar>
+        </div>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Navigation </q-item-label>
       </q-list>
     </q-drawer>
 
