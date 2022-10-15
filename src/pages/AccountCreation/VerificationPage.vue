@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <q-card flat class="my-card">
       <q-card-section class="q-gutter-md">
-        <div class="text-h6 text-center">Email Verification</div>
+        <div class="text-h6 text-center">Verify your account</div>
         <div class="text-caption text-justify">
           We have sent verification code to your email:
           <span class="text-caption text-weight-medium">your@email.com</span>
@@ -79,10 +79,10 @@
       <q-card-section class="text-center">
         <q-btn
           color="deep-purple-13"
-          label="Verify Account"
+          label="Verify"
           style="width: 134px"
           no-caps
-          @click="onVerifyAccount"
+          @click="onVerify"
         />
       </q-card-section>
     </q-card>
@@ -153,7 +153,7 @@ export default defineComponent({
         ev.target.select();
       },
 
-      onVerifyAccount() {
+      onVerify() {
         router.push({ name: "tracker-home" });
       },
     };
