@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-deep-purple-13" elevated>
       <q-toolbar>
-        <div class="col-1 col-sm-1">
+        <div class="col-1 col-sm-1 text-left">
           <q-btn
             v-if="backButtonVisibility"
             icon="west"
@@ -18,11 +18,21 @@
           <span class="text-h6">{{ getTitle }}</span>
         </div>
 
-        <div class="col-1 col-sm-1"></div>
+        <div class="col-1 col-sm-1 text-right">
+          <q-btn
+            v-if="addButtonVisibility"
+            label="Add"
+            aria-label="Add"
+            dense
+            flat
+            no-caps
+            @click="onAdd"
+          />
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-footer bordered class="bg-deep-purple-13">
+    <q-footer v-if="footerToolbarVisibility" bordered class="bg-deep-purple-13">
       <q-tabs
         active-color="white"
         indicator-color="transparent"
@@ -75,18 +85,6 @@
         >
           <q-tooltip anchor="top middle" self="center middle">
             Investment
-          </q-tooltip>
-        </q-route-tab>
-
-        <q-route-tab
-          name="savings"
-          icon="savings"
-          to="/tracker/savings"
-          exact
-          replace
-        >
-          <q-tooltip anchor="top middle" self="center middle">
-            Savings
           </q-tooltip>
         </q-route-tab>
 
@@ -145,6 +143,14 @@ export default defineComponent({
       return router.currentRoute.value.meta.title;
     });
 
+    const addButtonVisibility = computed(() => {
+      return router.currentRoute.value.meta.withAddButton;
+    });
+
+    const footerToolbarVisibility = computed(() => {
+      return router.currentRoute.value.meta.withFooterToolbar;
+    });
+
     const hasUnreadMessages = computed(() => {
       // TODO:: get the unread messages
       return Math.floor(Math.random() * 10) % 2 === 0;
@@ -154,11 +160,15 @@ export default defineComponent({
       selectedTab,
       backButtonVisibility,
       getTitle,
+      addButtonVisibility,
+      footerToolbarVisibility,
       hasUnreadMessages,
 
       onBack() {
         router.back();
       },
+
+      onAdd() {},
     };
   },
 });
