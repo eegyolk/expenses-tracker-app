@@ -30,6 +30,19 @@
       <q-card flat class="my-card-total">
         <q-card-section class="q-gutter-md">
           <div class="text-left">
+            <q-btn color="brown-10" icon="account_balance" round />
+          </div>
+
+          <div class="text-left">
+            <span class="text-body1">$ 2,000.00</span> <br />
+            <span class="text-caption text-grey">Investment</span>
+          </div>
+        </q-card-section>
+      </q-card>
+
+      <q-card flat class="my-card-total">
+        <q-card-section class="q-gutter-md">
+          <div class="text-left">
             <q-btn color="green-10" icon="savings" round />
           </div>
 
@@ -77,7 +90,7 @@ export default defineComponent({
         xaxis: {
           categories: [1, 2, 3, 4, 5, 6, 7],
         },
-        colors: ["#663D9D", "#3864AE", "#427544"],
+        colors: ["#663D9D", "#3864AE", "#5C4B48", "#427544"],
         grid: {
           show: false,
         },
@@ -89,6 +102,10 @@ export default defineComponent({
         },
         {
           name: "Expenses",
+          data: [5, 10, 5, 5, 10, 20, 5],
+        },
+        {
+          name: "Investment",
           data: [5, 10, 5, 5, 10, 20, 5],
         },
         {
