@@ -166,7 +166,9 @@ const routes = [
         component: () => import("src/pages/Tracker/HomePage.vue"),
         meta: {
           title: "Home",
+          withFooterToolbar: true,
           withBackButton: false,
+          withAddButton: false,
         },
       },
     ],
@@ -179,10 +181,29 @@ const routes = [
       {
         path: "",
         name: "tracker-income",
-        component: () => import("src/pages/Tracker/IncomePage.vue"),
+        component: () => import("src/pages/Tracker/Income/IndexPage.vue"),
         meta: {
           title: "Income",
+          withFooterToolbar: true,
           withBackButton: false,
+          withAddButton: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/tracker/income/add",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-income-add",
+        component: () => import("src/pages/Tracker/Income/AddPage.vue"),
+        meta: {
+          title: "Add Income",
+          withFooterToolbar: false,
+          withBackButton: true,
+          withAddButton: false,
         },
       },
     ],
@@ -198,7 +219,9 @@ const routes = [
         component: () => import("src/pages/Tracker/ExpensesPage.vue"),
         meta: {
           title: "Expenses",
+          withFooterToolbar: true,
           withBackButton: false,
+          withAddButton: true,
         },
       },
     ],
@@ -214,23 +237,9 @@ const routes = [
         component: () => import("src/pages/Tracker/InvestmentPage.vue"),
         meta: {
           title: "Investment",
+          withFooterToolbar: true,
           withBackButton: false,
-        },
-      },
-    ],
-  },
-
-  {
-    path: "/tracker/savings",
-    component: () => import("src/layouts/TrackerLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "tracker-savings",
-        component: () => import("src/pages/Tracker/SavingsPage.vue"),
-        meta: {
-          title: "Savings",
-          withBackButton: false,
+          withAddButton: true,
         },
       },
     ],
@@ -246,7 +255,9 @@ const routes = [
         component: () => import("src/pages/Tracker/ProfilePage.vue"),
         meta: {
           title: "Profile",
+          withFooterToolbar: true,
           withBackButton: false,
+          withAddButton: false,
         },
       },
     ],
