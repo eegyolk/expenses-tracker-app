@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <q-card flat class="my-card">
       <q-card-section class="q-gutter-md">
-        <div class="text-h6 text-center">Forgot Password?</div>
+        <div class="text-h6 text-center">Can't remember your password?</div>
         <div class="text-caption text-justify">
           Don't worry! It happens. Please enter the email address associated
           with your account.

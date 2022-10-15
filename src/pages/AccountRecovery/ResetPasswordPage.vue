@@ -52,10 +52,10 @@
       <q-card-section class="text-center">
         <q-btn
           color="deep-purple-13"
-          label="Submit"
+          label="Reset"
           style="width: 134px"
           no-caps
-          @click="onSubmit"
+          @click="onReset"
         />
       </q-card-section>
     </q-card>
@@ -91,7 +91,7 @@ export default defineComponent({
         confirmPasswordVisibility.value = !confirmPasswordVisibility.value;
       },
 
-      onSubmit() {
+      onReset() {
         router.replace({ name: "login" });
       },
     };

@@ -130,7 +130,7 @@ const routes = [
         component: () =>
           import("src/pages/AccountRecovery/VerificationPage.vue"),
         meta: {
-          title: "Reset Verification",
+          title: "Password Recovery",
           withBackButton: false,
         },
       },
@@ -147,7 +147,7 @@ const routes = [
         component: () =>
           import("src/pages/AccountRecovery/ResetPasswordPage.vue"),
         meta: {
-          title: "Reset Password",
+          title: "Password Recovery",
           withBackButton: false,
         },
       },

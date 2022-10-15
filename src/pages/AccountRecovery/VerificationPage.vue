@@ -79,10 +79,10 @@
       <q-card-section class="text-center">
         <q-btn
           color="deep-purple-13"
-          label="Verify Reset"
+          label="Verify"
           style="width: 134px"
           no-caps
-          @click="onVerifyReset"
+          @click="onVerify"
         />
       </q-card-section>
     </q-card>
@@ -153,7 +153,7 @@ export default defineComponent({
         ev.target.select();
       },
 
-      onVerifyReset() {
+      onVerify() {
         router.push({ name: "reset-password" });
       },
     };
