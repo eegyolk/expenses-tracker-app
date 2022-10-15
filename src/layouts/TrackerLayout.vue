@@ -28,76 +28,95 @@
         indicator-color="transparent"
         class="text-grey"
         v-model="selectedTab"
-        dense
         no-caps
       >
         <q-route-tab
           name="home"
           icon="home"
-          label="Home"
           to="/tracker/home"
           content-class=""
           exact
           replace
-        />
+          dense
+        >
+          <q-tooltip anchor="top middle" self="center middle"> Home </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           name="income"
           icon="account_balance_wallet"
-          label="Income"
           to="/tracker/income"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Income
+          </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           name="expenses"
           icon="shopping_cart"
-          label="Expenses"
           to="/tracker/expenses"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Expenses
+          </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           name="investment"
           icon="account_balance"
-          label="Investment"
           to="/tracker/investment"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Investment
+          </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           name="savings"
           icon="savings"
-          label="Savings"
           to="/tracker/savings"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Savings
+          </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           v-if="hasUnreadMessages"
           name="profile"
           icon="account_circle"
-          label="Profile"
           alert="red"
           alert-icon="mark_unread_chat_alt"
           to="/tracker/profile"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Profile
+          </q-tooltip>
+        </q-route-tab>
 
         <q-route-tab
           v-else
           name="profile"
           icon="account_circle"
-          label="Profile"
           to="/tracker/profile"
           exact
           replace
-        />
+        >
+          <q-tooltip anchor="top middle" self="center middle">
+            Profile
+          </q-tooltip>
+        </q-route-tab>
       </q-tabs>
     </q-footer>
 
