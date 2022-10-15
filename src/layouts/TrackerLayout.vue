@@ -58,6 +58,16 @@
           exact
           replace
         />
+
+        <q-route-tab
+          name="investment"
+          icon="account_balance"
+          label="Investment"
+          to="/tracker/investment"
+          exact
+          replace
+        />
+
         <q-route-tab
           name="savings"
           icon="savings"

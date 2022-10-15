@@ -205,6 +205,22 @@ const routes = [
   },
 
   {
+    path: "/tracker/investment",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-investment",
+        component: () => import("src/pages/Tracker/InvestmentPage.vue"),
+        meta: {
+          title: "Investment",
+          withBackButton: false,
+        },
+      },
+    ],
+  },
+
+  {
     path: "/tracker/savings",
     component: () => import("src/layouts/TrackerLayout.vue"),
     children: [
