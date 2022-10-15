@@ -26,7 +26,7 @@
         <q-btn
           color="deep-purple-13"
           label="Submit"
-          style="width: 134px"
+          class="full-width"
           no-caps
           @click="onSubmit"
         />

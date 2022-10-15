@@ -95,7 +95,7 @@
         <q-btn
           color="deep-purple-13"
           label="Register"
-          style="width: 134px"
+          class="full-width"
           no-caps
           @click="onRegister"
         />
