@@ -6,7 +6,7 @@
       </q-card-section>
 
       <q-card-section class="q-gutter-md">
-        <div class="text-h6 text-center q-pt-lg">Hi, welcome back!</div>
+        <div class="text-h6 text-center q-pt-lg">Hi, Welcome back!</div>
 
         <div class="q-gutter-md">
           <div class="full-width">
