@@ -2,6 +2,7 @@
   <q-date
     v-model="date"
     color="deep-purple-13"
+    :range="rangeSelection"
     today-btn
     @update:model-value="onSelectDate"
   />
@@ -15,6 +16,10 @@ export default defineComponent({
   name: "SelectDateForm",
 
   props: {
+    rangeSelection: {
+      type: Boolean,
+      default: false,
+    },
     selectedDate: {
       type: String,
       default: "",
@@ -26,6 +31,7 @@ export default defineComponent({
 
     return {
       date,
+
       onSelectDate(value) {
         emit("input", value);
       },
