@@ -9,10 +9,9 @@
                 Your Income
               </div>
               <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">
-                $ 10,000.00
+                <q-icon name="currency_yen" /> 10,000.00
               </div>
             </div>
-
             <div class="col-1 col-sm-1">
               <q-btn
                 color="deep-purple-13"
@@ -30,6 +29,41 @@
 
     <div class="row wrap justify-center">
       <q-card flat bordered class="my-card">
+        <q-card-section class="text-center">
+          <q-btn-toggle
+            v-model="filterBy"
+            toggle-color="deep-purple-13"
+            :options="[
+              { label: 'Week', value: 'week', slot: 'week' },
+              { label: 'Month', value: 'month', slot: 'month' },
+              { label: 'Last Month', value: 'lastMonth', slot: 'lastMonth' },
+              { value: 'custom', slot: 'custom' },
+            ]"
+            stretch
+            no-caps
+            flat
+            @update:model-value="(value) => onSelectFilter(value, false)"
+          >
+            <template v-slot:week>
+              <q-tooltip>This week</q-tooltip>
+            </template>
+            <template v-slot:month>
+              <q-tooltip>This month</q-tooltip>
+            </template>
+            <template v-slot:lastMonth>
+              <q-tooltip>Last month</q-tooltip>
+            </template>
+            <template v-slot:custom>
+              <div class="text-center">
+                <q-tooltip>Custom date range</q-tooltip>
+                <q-icon name="event" @click="onSelectFilter('custom', true)" />
+              </div>
+            </template>
+          </q-btn-toggle>
+        </q-card-section>
+
+        <q-separator unset />
+
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-6 col-sm-6">
@@ -37,19 +71,49 @@
                 Income Lists
               </span>
             </div>
+            <div class="col-6 col-sm-6 text-right">
+              <span class="text-grey text-caption">
+                {{ dateFrom }} - {{ dateTo }}
+              </span>
+            </div>
           </div>
 
           <div class="full-width">
-            <q-table
-              style="height: 400px"
-              :rows="rows"
-              :columns="columns"
-              row-key="index"
-              virtual-scroll
-              v-model:pagination="pagination"
-              :rows-per-page-options="[0]"
-              hide-bottom
-            />
+            <q-scroll-area
+              :thumb-style="thumbStyle"
+              :bar-style="barStyle"
+              style="height: 450px"
+              id="scroll-area-with-virtual-scroll-1"
+            >
+              <q-virtual-scroll
+                scroll-target="#scroll-area-with-virtual-scroll-1 > .scroll"
+                :items="heavyList"
+                :virtual-scroll-item-size="32"
+                separator
+                v-slot="{ item, index }"
+              >
+                <q-item :key="index">
+                  <q-item-section top avatar>
+                    <q-avatar
+                      color="deep-purple-13"
+                      text-color="white"
+                      icon="money"
+                    />
+                  </q-item-section>
+
+                  <q-item-section>
+                    <q-item-label>Salary {{ item.label }}</q-item-label>
+                    <q-item-label caption lines="2">
+                      Lorem ipsum dolor sit amet, consectetur adipiscit elit.
+                    </q-item-label>
+                  </q-item-section>
+
+                  <q-item-section side>
+                    <span>3,000.00</span>
+                  </q-item-section>
+                </q-item>
+              </q-virtual-scroll>
+            </q-scroll-area>
           </div>
         </q-card-section>
       </q-card>
@@ -58,105 +122,116 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { date } from "quasar";
+import { defineComponent, ref, onMounted } from "vue";
+import { date, useQuasar } from "quasar";
+import {
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  subMonths,
+} from "date-fns";
+import SelectDateForm from "src/components/forms/SelectDateForm.vue";
+import QuickDialog from "components/QuickDialog.vue";
 
-const typeCollections = [
-  { icon: "wallet", label: "Salary" },
-  { icon: "add_card", label: "Freelance" },
-];
+const maxSize = 100;
+const heavyList = [];
 
-const columns = [
-  {
-    name: "name",
-    required: true,
-    label: "Dessert (100g serving)",
-    align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
-    sortable: true,
-  },
-  {
-    name: "calories",
-    align: "center",
-    label: "Calories",
-    field: "calories",
-    sortable: true,
-  },
-];
-
-const rows = [
-  {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-  },
-  {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-  },
-  {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-  },
-];
+for (let i = 0; i < maxSize; i++) {
+  heavyList.push({
+    label: "Option " + (i + 1),
+  });
+}
 
 export default defineComponent({
   name: "IndexPage",
 
   setup() {
-    const currentDate = ref(date.formatDate(Date.now(), "YYYY/MM/DD"));
-    const selectedType = ref("");
-    const types = ref(typeCollections);
-    const amount = ref(0);
+    const filterBy = ref("week");
+    const dateFrom = ref("");
+    const dateTo = ref("");
+    const $q = useQuasar();
+
+    const onSelectFilterHander = (value, isCustom = false) => {
+      let from = "";
+      let to = "";
+
+      switch (value) {
+        case "week":
+          from = startOfWeek(new Date());
+          to = endOfWeek(new Date());
+          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
+          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
+          break;
+
+        case "month":
+          from = startOfMonth(new Date());
+          to = endOfMonth(new Date());
+          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
+          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
+          break;
+
+        case "lastMonth":
+          const lastMonth = subMonths(new Date(), 1);
+          from = startOfMonth(lastMonth);
+          to = endOfMonth(lastMonth);
+          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
+          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
+          break;
+
+        case "custom":
+          if (isCustom) {
+            $q.dialog({
+              component: QuickDialog,
+              componentProps: {
+                subComponent: SelectDateForm,
+                subProps: {
+                  rangeSelection: true,
+                },
+              },
+            })
+              .onOk((value) => {
+                from = value.from;
+                to = value.to;
+                dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
+                dateTo.value = date.formatDate(to, "MM/DD/YYYY");
+              })
+              .onCancel(() => {})
+              .onDismiss(() => {});
+          }
+          break;
+      }
+    };
+
+    onMounted(() => {
+      onSelectFilterHander("week", false);
+    });
 
     return {
-      currentDate,
-      selectedType,
-      types,
-      amount,
-      columns,
-      rows,
-      pagination: ref({
-        rowsPerPage: 0,
-      }),
+      filterBy,
+      dateFrom,
+      dateTo,
+      heavyList,
+      thumbStyle: {
+        right: "5px",
+        borderRadius: "8px",
+        backgroundColor: "#6520FF",
+        width: "8px",
+        opacity: 0.75,
+      },
+      barStyle: {
+        right: "2px",
+        borderRadius: "14px",
+        backgroundColor: "#6520FF",
+        width: "14px",
+        opacity: 0.2,
+        marginTop: "-3px",
+        marginBottom: "-3px",
+        paddingTop: "3px",
+        paddingBottom: "3px",
+      },
+
+      onSelectFilter: onSelectFilterHander,
     };
   },
 });
