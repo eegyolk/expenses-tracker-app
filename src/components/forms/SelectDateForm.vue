@@ -1,7 +1,7 @@
 <template>
   <q-date
     v-model="date"
-    color="deep-purpe-13"
+    color="deep-purple-13"
     today-btn
     @update:model-value="onSelectDate"
   />
