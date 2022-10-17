@@ -168,7 +168,21 @@ export default defineComponent({
         router.back();
       },
 
-      onAdd() {},
+      onAdd() {
+        switch (router.currentRoute.value.name) {
+          case "tracker-income":
+            router.push({ name: "tracker-income-add" });
+            break;
+
+          case "tracker-expenses":
+            router.push({ name: "tracker-expenses-add" });
+            break;
+
+          case "tracker-investment":
+            router.push({ name: "tracker-investment-add" });
+            break;
+        }
+      },
     };
   },
 });

@@ -216,12 +216,29 @@ const routes = [
       {
         path: "",
         name: "tracker-expenses",
-        component: () => import("src/pages/Tracker/ExpensesPage.vue"),
+        component: () => import("src/pages/Tracker/Expenses/IndexPage.vue"),
         meta: {
           withBackButton: false,
           title: "Expenses",
           withAddButton: true,
           withFooterToolbar: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/tracker/expenses/add",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-expenses-add",
+        component: () => import("src/pages/Tracker/Expenses/AddPage.vue"),
+        meta: {
+          withBackButton: true,
+          title: "Add Expenses",
+          withAddButton: false,
+          withFooterToolbar: false,
         },
       },
     ],
@@ -234,12 +251,29 @@ const routes = [
       {
         path: "",
         name: "tracker-investment",
-        component: () => import("src/pages/Tracker/InvestmentPage.vue"),
+        component: () => import("src/pages/Tracker/Investment/IndexPage.vue"),
         meta: {
           withBackButton: false,
           title: "Investment",
           withAddButton: true,
           withFooterToolbar: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/tracker/investment/add",
+    component: () => import("src/layouts/TrackerLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "tracker-investment-add",
+        component: () => import("src/pages/Tracker/Investment/AddPage.vue"),
+        meta: {
+          withBackButton: true,
+          title: "Add Investment",
+          withAddButton: false,
+          withFooterToolbar: false,
         },
       },
     ],
