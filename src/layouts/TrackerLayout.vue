@@ -18,17 +18,7 @@
           <span class="text-h6">{{ getTitle }}</span>
         </div>
 
-        <div class="col-1 col-sm-1 text-right">
-          <q-btn
-            v-if="addButtonVisibility"
-            label="Add"
-            aria-label="Add"
-            dense
-            flat
-            no-caps
-            @click="onAdd"
-          />
-        </div>
+        <div class="col-1 col-sm-1 text-right"></div>
       </q-toolbar>
     </q-header>
 
@@ -143,10 +133,6 @@ export default defineComponent({
       return router.currentRoute.value.meta.title;
     });
 
-    const addButtonVisibility = computed(() => {
-      return router.currentRoute.value.meta.withAddButton;
-    });
-
     const footerToolbarVisibility = computed(() => {
       return router.currentRoute.value.meta.withFooterToolbar;
     });
@@ -160,28 +146,12 @@ export default defineComponent({
       selectedTab,
       backButtonVisibility,
       getTitle,
-      addButtonVisibility,
+
       footerToolbarVisibility,
       hasUnreadMessages,
 
       onBack() {
         router.back();
-      },
-
-      onAdd() {
-        switch (router.currentRoute.value.name) {
-          case "tracker-income":
-            router.push({ name: "tracker-income-add" });
-            break;
-
-          case "tracker-expenses":
-            router.push({ name: "tracker-expenses-add" });
-            break;
-
-          case "tracker-investment":
-            router.push({ name: "tracker-investment-add" });
-            break;
-        }
       },
     };
   },

@@ -167,7 +167,6 @@ const routes = [
         meta: {
           withBackButton: false,
           title: "Home",
-          withAddButton: false,
           withFooterToolbar: true,
         },
       },
@@ -185,7 +184,6 @@ const routes = [
         meta: {
           withBackButton: false,
           title: "Income",
-          withAddButton: true,
           withFooterToolbar: true,
         },
       },
@@ -202,7 +200,6 @@ const routes = [
         meta: {
           withBackButton: true,
           title: "Add Income",
-          withAddButton: false,
           withFooterToolbar: false,
         },
       },
@@ -220,7 +217,6 @@ const routes = [
         meta: {
           withBackButton: false,
           title: "Expenses",
-          withAddButton: true,
           withFooterToolbar: true,
         },
       },
@@ -237,7 +233,6 @@ const routes = [
         meta: {
           withBackButton: true,
           title: "Add Expenses",
-          withAddButton: false,
           withFooterToolbar: false,
         },
       },
@@ -255,7 +250,6 @@ const routes = [
         meta: {
           withBackButton: false,
           title: "Investment",
-          withAddButton: true,
           withFooterToolbar: true,
         },
       },
@@ -272,7 +266,6 @@ const routes = [
         meta: {
           withBackButton: true,
           title: "Add Investment",
-          withAddButton: false,
           withFooterToolbar: false,
         },
       },
@@ -290,7 +283,6 @@ const routes = [
         meta: {
           withBackButton: false,
           title: "Profile",
-          withAddButton: false,
           withFooterToolbar: true,
         },
       },

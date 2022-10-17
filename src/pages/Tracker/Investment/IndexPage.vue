@@ -2,38 +2,34 @@
   <q-page class="bg-grey-3 q-gutter-md">
     <div class="row wrap justify-center q-pt-lg">
       <q-card class="my-card" flat bordered>
-        <q-card-section horizontal>
-          <q-card-section class="q-pt-xs">
-            <div class="text-overline">Your investment</div>
-            <div class="text-h5 q-mt-sm q-mb-xs">$ 10,000.00</div>
-            <div class="text-caption text-grey">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <q-card-section class="q-pt-lg">
+          <div class="row items-center q-px-lg q-">
+            <div class="col col-sm">
+              <div class="text-body2 text-weight-medium text-grey">
+                Your Investment
+              </div>
+              <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">
+                $ 10,000.00
+              </div>
             </div>
-          </q-card-section>
 
-          <q-card-section class="col-5 flex flex-center">
-            <q-img class="rounded-borders" src="~assets/investment-image.svg" />
-          </q-card-section>
-        </q-card-section>
-
-        <q-separator />
-
-        <q-card-section>
-          <div class="text-center">
-            <q-btn flat class="text-strike"> Day </q-btn>
-            <q-btn flat> Week </q-btn>
-            <q-btn flat> Month </q-btn>
-            <q-btn flat> Range </q-btn>
+            <div class="col-1 col-sm-1">
+              <q-btn
+                color="deep-purple-13"
+                icon="add"
+                to="/tracker/investment/add"
+                round
+                dense
+                unelevated
+              />
+            </div>
           </div>
-
-          <div class="text-center">Sat, Oct. 16, 2022</div>
         </q-card-section>
       </q-card>
     </div>
 
     <div class="row wrap justify-center">
-      <q-card flat class="my-card">
+      <q-card flat bordered class="my-card">
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-6 col-sm-6">
