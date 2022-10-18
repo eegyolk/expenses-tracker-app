@@ -44,14 +44,14 @@
                 v-if="sort === 'DESC'"
                 name="fa-solid fa-arrow-down-wide-short"
                 color="grey"
-                style="cursor: pointer"
+                class="cursor-pointer"
                 @click="onSortChange('ASC')"
               />
               <q-icon
                 v-else
                 name="fa-solid fa-arrow-up-wide-short"
                 color="grey"
-                style="cursor: pointer"
+                class="cursor-pointer"
                 @click="onSortChange('DESC')"
               />
               <span class="text-body2 text-weight-medium text-grey q-pl-xs">
