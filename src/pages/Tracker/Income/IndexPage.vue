@@ -40,13 +40,27 @@
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-6 col-sm-6">
-              <span class="text-grey text-body1 text-weight-medium">
+              <q-icon
+                v-if="sort === 'DESC'"
+                name="fa-solid fa-arrow-down-wide-short"
+                color="grey"
+                style="cursor: pointer"
+                @click="onSortChange('ASC')"
+              />
+              <q-icon
+                v-else
+                name="fa-solid fa-arrow-up-wide-short"
+                color="grey"
+                style="cursor: pointer"
+                @click="onSortChange('DESC')"
+              />
+              <span class="text-body2 text-weight-medium text-grey q-pl-xs">
                 Income Lists
               </span>
             </div>
 
             <div class="col-6 col-sm-6 text-right">
-              <span class="text-grey text-caption">
+              <span class="text-caption text-weight-medium text-grey">
                 {{ dateFrom }} - {{ dateTo }}
               </span>
             </div>
@@ -118,10 +132,12 @@ export default defineComponent({
   setup() {
     const dateFrom = ref("");
     const dateTo = ref("");
+    const sort = ref("DESC");
 
     return {
       dateFrom,
       dateTo,
+      sort,
 
       heavyList,
       thumbStyle: {
@@ -146,6 +162,10 @@ export default defineComponent({
       onSelectFilterDateRange({ from, to }) {
         dateFrom.value = from;
         dateTo.value = to;
+      },
+
+      onSortChange(value) {
+        sort.value = value;
       },
     };
   },
