@@ -24,7 +24,7 @@ const routes = [
         path: "",
         name: "register",
         component: () =>
-          import("src/pages/AccountCreation/RegistrationPage.vue"),
+          import("src/pages/account-creation/RegistrationPage.vue"),
         meta: {
           withBackButton: true,
           title: "Registration",
@@ -41,7 +41,7 @@ const routes = [
         path: "",
         name: "verify-account",
         component: () =>
-          import("src/pages/AccountCreation/VerificationPage.vue"),
+          import("src/pages/account-creation/VerificationPage.vue"),
         meta: {
           withBackButton: false,
           title: "Account Verification",
@@ -57,7 +57,7 @@ const routes = [
       {
         path: "",
         name: "terms",
-        component: () => import("src/pages/AccountCreation/TermsPage.vue"),
+        component: () => import("src/pages/account-creation/TermsPage.vue"),
         meta: {
           withBackButton: true,
           title: "Terms of Service",
@@ -74,7 +74,7 @@ const routes = [
         path: "",
         name: "privacy-policy",
         component: () =>
-          import("src/pages/AccountCreation/PrivacyPolicyPage.vue"),
+          import("src/pages/account-creation/PrivacyPolicyPage.vue"),
         meta: {
           withBackButton: true,
           title: "Privacy Policy",
@@ -92,7 +92,7 @@ const routes = [
       {
         path: "",
         name: "login",
-        component: () => import("src/pages/Authentication/LoginPage.vue"),
+        component: () => import("src/pages/authentication/LoginPage.vue"),
         meta: {
           withBackButton: true,
           title: "Sign In",
@@ -111,7 +111,7 @@ const routes = [
         path: "",
         name: "forgot-password",
         component: () =>
-          import("src/pages/AccountRecovery/ForgotPasswordPage.vue"),
+          import("src/pages/account-recovery/ForgotPasswordPage.vue"),
         meta: {
           withBackButton: true,
           title: "Forgot Password",
@@ -128,7 +128,7 @@ const routes = [
         path: "",
         name: "verify-reset",
         component: () =>
-          import("src/pages/AccountRecovery/VerificationPage.vue"),
+          import("src/pages/account-recovery/VerificationPage.vue"),
         meta: {
           withBackButton: false,
           title: "Password Recovery",
@@ -145,7 +145,7 @@ const routes = [
         path: "",
         name: "reset-password",
         component: () =>
-          import("src/pages/AccountRecovery/ResetPasswordPage.vue"),
+          import("src/pages/account-recovery/ResetPasswordPage.vue"),
         meta: {
           withBackButton: false,
           title: "Password Recovery",
@@ -163,7 +163,7 @@ const routes = [
       {
         path: "",
         name: "tracker-home",
-        component: () => import("src/pages/Tracker/HomePage.vue"),
+        component: () => import("src/pages/tracker/HomePage.vue"),
         meta: {
           withBackButton: false,
           title: "Home",
@@ -180,7 +180,7 @@ const routes = [
       {
         path: "",
         name: "tracker-income",
-        component: () => import("src/pages/Tracker/Income/IndexPage.vue"),
+        component: () => import("src/pages/tracker/income/IndexPage.vue"),
         meta: {
           withBackButton: false,
           title: "Income",
@@ -196,7 +196,7 @@ const routes = [
       {
         path: "",
         name: "tracker-income-add",
-        component: () => import("src/pages/Tracker/Income/AddPage.vue"),
+        component: () => import("src/pages/tracker/income/AddPage.vue"),
         meta: {
           withBackButton: true,
           title: "Add Income",
@@ -213,7 +213,7 @@ const routes = [
       {
         path: "",
         name: "tracker-expenses",
-        component: () => import("src/pages/Tracker/Expenses/IndexPage.vue"),
+        component: () => import("src/pages/tracker/expenses/IndexPage.vue"),
         meta: {
           withBackButton: false,
           title: "Expenses",
@@ -229,7 +229,7 @@ const routes = [
       {
         path: "",
         name: "tracker-expenses-add",
-        component: () => import("src/pages/Tracker/Expenses/AddPage.vue"),
+        component: () => import("src/pages/tracker/expenses/AddPage.vue"),
         meta: {
           withBackButton: true,
           title: "Add Expenses",
@@ -246,7 +246,7 @@ const routes = [
       {
         path: "",
         name: "tracker-investment",
-        component: () => import("src/pages/Tracker/Investment/IndexPage.vue"),
+        component: () => import("src/pages/tracker/investment/IndexPage.vue"),
         meta: {
           withBackButton: false,
           title: "Investment",
@@ -262,7 +262,7 @@ const routes = [
       {
         path: "",
         name: "tracker-investment-add",
-        component: () => import("src/pages/Tracker/Investment/AddPage.vue"),
+        component: () => import("src/pages/tracker/investment/AddPage.vue"),
         meta: {
           withBackButton: true,
           title: "Add Investment",
@@ -279,7 +279,7 @@ const routes = [
       {
         path: "",
         name: "tracker-profile",
-        component: () => import("src/pages/Tracker/ProfilePage.vue"),
+        component: () => import("src/pages/tracker/ProfilePage.vue"),
         meta: {
           withBackButton: false,
           title: "Profile",
