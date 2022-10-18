@@ -29,9 +29,9 @@
       </q-card>
     </div>
 
-    <div class="row wrap justify-center">
+    <div class="row wrap justify-center q-pb-lg">
       <q-card flat bordered class="my-card">
-        <q-card-section class="text-center">
+        <q-card-section class="text-center bg-deep-purple-13 text-grey-5">
           <filter-by-section @select="onSelectFilterDateRange" />
         </q-card-section>
 
@@ -67,7 +67,7 @@
           </div>
 
           <div class="full-width">
-            <list-section />
+            <list-section transaction="EXPENSES" />
           </div>
         </q-card-section>
       </q-card>

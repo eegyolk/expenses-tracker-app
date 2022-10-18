@@ -1,7 +1,7 @@
 <template>
   <q-btn-toggle
     v-model="filterBy"
-    toggle-color="deep-purple-13"
+    toggle-color="white"
     :options="[
       { label: 'Week', value: 'week', slot: 'week' },
       { label: 'Month', value: 'month', slot: 'month' },
