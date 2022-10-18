@@ -28,7 +28,7 @@
     <template v-slot:custom>
       <div class="text-center">
         <q-tooltip>Custom date range</q-tooltip>
-        <q-icon name="event" @click="onSelectFilter('custom', true)" />
+        <q-icon name="date_range" @click="onSelectFilter('custom', true)" />
       </div>
     </template>
   </q-btn-toggle>
