@@ -100,8 +100,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { date, useQuasar } from "quasar";
-import AddCategoryForm from "src/components/forms/AddCategoryForm.vue";
-import SelectDateForm from "src/components/forms/SelectDateForm.vue";
+import AddCategoryForm from "components/forms/AddCategoryForm.vue";
+import SelectDateForm from "components/forms/SelectDateForm.vue";
 import QuickDialog from "components/QuickDialog.vue";
 
 const categoryCollections = ["Salary", "Freelance"];

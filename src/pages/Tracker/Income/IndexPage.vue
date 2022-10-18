@@ -8,10 +8,12 @@
               <div class="text-body2 text-weight-medium text-grey">
                 Your Income
               </div>
+
               <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">
                 <q-icon name="currency_yen" /> 10,000.00
               </div>
             </div>
+
             <div class="col-1 col-sm-1">
               <q-btn
                 color="deep-purple-13"
@@ -30,36 +32,7 @@
     <div class="row wrap justify-center">
       <q-card flat bordered class="my-card">
         <q-card-section class="text-center">
-          <q-btn-toggle
-            v-model="filterBy"
-            toggle-color="deep-purple-13"
-            :options="[
-              { label: 'Week', value: 'week', slot: 'week' },
-              { label: 'Month', value: 'month', slot: 'month' },
-              { label: 'Last Month', value: 'lastMonth', slot: 'lastMonth' },
-              { value: 'custom', slot: 'custom' },
-            ]"
-            stretch
-            no-caps
-            flat
-            @update:model-value="(value) => onSelectFilter(value, false)"
-          >
-            <template v-slot:week>
-              <q-tooltip>This week</q-tooltip>
-            </template>
-            <template v-slot:month>
-              <q-tooltip>This month</q-tooltip>
-            </template>
-            <template v-slot:lastMonth>
-              <q-tooltip>Last month</q-tooltip>
-            </template>
-            <template v-slot:custom>
-              <div class="text-center">
-                <q-tooltip>Custom date range</q-tooltip>
-                <q-icon name="event" @click="onSelectFilter('custom', true)" />
-              </div>
-            </template>
-          </q-btn-toggle>
+          <filter-by-section @select="onSelectFilterDateRange" />
         </q-card-section>
 
         <q-separator unset />
@@ -71,6 +44,7 @@
                 Income Lists
               </span>
             </div>
+
             <div class="col-6 col-sm-6 text-right">
               <span class="text-grey text-caption">
                 {{ dateFrom }} - {{ dateTo }}
@@ -122,17 +96,8 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import { date, useQuasar } from "quasar";
-import {
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  subMonths,
-} from "date-fns";
-import SelectDateForm from "src/components/forms/SelectDateForm.vue";
-import QuickDialog from "components/QuickDialog.vue";
+import { defineComponent, ref } from "vue";
+import FilterBySection from "components/sections/FilterBySection.vue";
 
 const maxSize = 100;
 const heavyList = [];
@@ -146,71 +111,18 @@ for (let i = 0; i < maxSize; i++) {
 export default defineComponent({
   name: "IndexPage",
 
+  components: {
+    FilterBySection,
+  },
+
   setup() {
-    const filterBy = ref("week");
     const dateFrom = ref("");
     const dateTo = ref("");
-    const $q = useQuasar();
-
-    const onSelectFilterHander = (value, isCustom = false) => {
-      let from = "";
-      let to = "";
-
-      switch (value) {
-        case "week":
-          from = startOfWeek(new Date());
-          to = endOfWeek(new Date());
-          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
-          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
-          break;
-
-        case "month":
-          from = startOfMonth(new Date());
-          to = endOfMonth(new Date());
-          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
-          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
-          break;
-
-        case "lastMonth":
-          const lastMonth = subMonths(new Date(), 1);
-          from = startOfMonth(lastMonth);
-          to = endOfMonth(lastMonth);
-          dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
-          dateTo.value = date.formatDate(to, "MM/DD/YYYY");
-          break;
-
-        case "custom":
-          if (isCustom) {
-            $q.dialog({
-              component: QuickDialog,
-              componentProps: {
-                subComponent: SelectDateForm,
-                subProps: {
-                  rangeSelection: true,
-                },
-              },
-            })
-              .onOk((value) => {
-                from = value.from;
-                to = value.to;
-                dateFrom.value = date.formatDate(from, "MM/DD/YYYY");
-                dateTo.value = date.formatDate(to, "MM/DD/YYYY");
-              })
-              .onCancel(() => {})
-              .onDismiss(() => {});
-          }
-          break;
-      }
-    };
-
-    onMounted(() => {
-      onSelectFilterHander("week", false);
-    });
 
     return {
-      filterBy,
       dateFrom,
       dateTo,
+
       heavyList,
       thumbStyle: {
         right: "5px",
@@ -231,7 +143,10 @@ export default defineComponent({
         paddingBottom: "3px",
       },
 
-      onSelectFilter: onSelectFilterHander,
+      onSelectFilterDateRange({ from, to }) {
+        dateFrom.value = from;
+        dateTo.value = to;
+      },
     };
   },
 });
