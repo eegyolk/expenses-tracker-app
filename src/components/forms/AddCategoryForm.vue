@@ -51,7 +51,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onBeforeUnmount } from "vue";
+import { date, useQuasar, QSpinnerIos } from "quasar";
 
 export default defineComponent({
   name: "AddCategoryForm",
@@ -66,12 +67,31 @@ export default defineComponent({
   setup(props, { emit }) {
     const category = ref("");
 
+    let timer;
+    const $q = useQuasar();
+
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer);
+      }
+    });
+
     return {
       category,
 
       onSave() {
-        console.log(props.transaction);
-        emit("input", category.value);
+        $q.loading.show({
+          spinner: QSpinnerIos,
+          spinnerColor: "deep-purple-13",
+          spinnerSize: "md",
+          backgroundColor: "grey-1",
+        });
+
+        timer = setTimeout(() => {
+          $q.loading.hide();
+          console.log(props.transaction);
+          emit("input", category.value);
+        }, 1000);
       },
 
       onClose() {
