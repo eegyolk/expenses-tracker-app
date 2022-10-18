@@ -8,8 +8,9 @@
               <div class="text-body2 text-weight-medium text-grey">
                 Your Investment
               </div>
+
               <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">
-                $ 10,000.00
+                <q-icon name="currency_yen" /> 10,000.00
               </div>
             </div>
 
@@ -30,26 +31,43 @@
 
     <div class="row wrap justify-center">
       <q-card flat bordered class="my-card">
+        <q-card-section class="text-center">
+          <filter-by-section @select="onSelectFilterDateRange" />
+        </q-card-section>
+
+        <q-separator unset />
+
         <q-card-section>
           <div class="row q-pb-md">
             <div class="col-6 col-sm-6">
-              <span class="text-grey text-body1 text-weight-medium">
-                Investment Lists
+              <q-icon
+                v-if="sort === 'DESC'"
+                name="fa-solid fa-arrow-down-wide-short"
+                color="grey"
+                style="cursor: pointer"
+                @click="onSortChange('ASC')"
+              />
+              <q-icon
+                v-else
+                name="fa-solid fa-arrow-up-wide-short"
+                color="grey"
+                style="cursor: pointer"
+                @click="onSortChange('DESC')"
+              />
+              <span class="text-body2 text-weight-medium text-grey q-pl-xs">
+                Investment List
+              </span>
+            </div>
+
+            <div class="col-6 col-sm-6 text-right">
+              <span class="text-caption text-weight-medium text-grey">
+                {{ dateFrom }} - {{ dateTo }}
               </span>
             </div>
           </div>
 
           <div class="full-width">
-            <q-table
-              style="height: 400px"
-              :rows="rows"
-              :columns="columns"
-              row-key="index"
-              virtual-scroll
-              v-model:pagination="pagination"
-              :rows-per-page-options="[0]"
-              hide-bottom
-            />
+            <list-section />
           </div>
         </q-card-section>
       </q-card>
@@ -59,104 +77,35 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { date } from "quasar";
-
-const typeCollections = [
-  { icon: "wallet", label: "Salary" },
-  { icon: "add_card", label: "Freelance" },
-];
-
-const columns = [
-  {
-    name: "name",
-    required: true,
-    label: "Dessert (100g serving)",
-    align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
-    sortable: true,
-  },
-  {
-    name: "calories",
-    align: "center",
-    label: "Calories",
-    field: "calories",
-    sortable: true,
-  },
-];
-
-const rows = [
-  {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-  },
-  {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-  },
-  {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-  },
-];
+import FilterBySection from "components/sections/FilterBySection.vue";
+import ListSection from "components/sections/ListSection.vue";
 
 export default defineComponent({
   name: "IndexPage",
 
+  components: {
+    FilterBySection,
+    ListSection,
+  },
+
   setup() {
-    const currentDate = ref(date.formatDate(Date.now(), "YYYY/MM/DD"));
-    const selectedType = ref("");
-    const types = ref(typeCollections);
-    const amount = ref(0);
+    const dateFrom = ref("");
+    const dateTo = ref("");
+    const sort = ref("DESC");
 
     return {
-      currentDate,
-      selectedType,
-      types,
-      amount,
-      columns,
-      rows,
-      pagination: ref({
-        rowsPerPage: 0,
-      }),
+      dateFrom,
+      dateTo,
+      sort,
+
+      onSelectFilterDateRange({ from, to }) {
+        dateFrom.value = from;
+        dateTo.value = to;
+      },
+
+      onSortChange(value) {
+        sort.value = value;
+      },
     };
   },
 });

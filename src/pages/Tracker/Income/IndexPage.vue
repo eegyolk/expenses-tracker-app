@@ -55,7 +55,7 @@
                 @click="onSortChange('DESC')"
               />
               <span class="text-body2 text-weight-medium text-grey q-pl-xs">
-                Income Lists
+                Income List
               </span>
             </div>
 
