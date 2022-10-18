@@ -14,20 +14,40 @@
     @update:model-value="(value) => onSelectFilter(value, false)"
   >
     <template v-slot:week>
-      <q-tooltip>This week</q-tooltip>
+      <q-tooltip
+        anchor="bottom middle"
+        self="center middle"
+        class="bg-deep-purple-10 text-white"
+        >This week</q-tooltip
+      >
     </template>
 
     <template v-slot:month>
-      <q-tooltip>This month</q-tooltip>
+      <q-tooltip
+        anchor="bottom middle"
+        self="center middle"
+        class="bg-deep-purple-10 text-white"
+        >This month</q-tooltip
+      >
     </template>
 
     <template v-slot:lastMonth>
-      <q-tooltip>Last month</q-tooltip>
+      <q-tooltip
+        anchor="bottom middle"
+        self="center middle"
+        class="bg-deep-purple-10 text-white"
+        >Last month</q-tooltip
+      >
     </template>
 
     <template v-slot:custom>
       <div class="text-center">
-        <q-tooltip>Custom date range</q-tooltip>
+        <q-tooltip
+          anchor="bottom middle"
+          self="center middle"
+          class="bg-deep-purple-10 text-white"
+          >Custom date range</q-tooltip
+        >
         <q-icon name="date_range" @click="onSelectFilter('custom', true)" />
       </div>
     </template>

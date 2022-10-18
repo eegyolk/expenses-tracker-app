@@ -22,7 +22,15 @@
                 round
                 dense
                 unelevated
-              />
+              >
+                <q-tooltip
+                  anchor="bottom middle"
+                  self="center middle"
+                  class="bg-deep-purple-10 text-white"
+                >
+                  Add income
+                </q-tooltip>
+              </q-btn>
             </div>
           </div>
         </q-card-section>

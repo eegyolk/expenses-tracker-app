@@ -11,7 +11,15 @@
             dense
             flat
             @click="onBack"
-          />
+          >
+            <q-tooltip
+              anchor="bottom middle"
+              self="center middle"
+              class="bg-deep-purple-10 text-white"
+            >
+              Back to previous page
+            </q-tooltip>
+          </q-btn>
         </div>
 
         <div class="col col-sm text-center">
@@ -39,7 +47,13 @@
           replace
           dense
         >
-          <q-tooltip anchor="top middle" self="center middle"> Home </q-tooltip>
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
+            Home
+          </q-tooltip>
         </q-route-tab>
 
         <q-route-tab
@@ -49,7 +63,11 @@
           exact
           replace
         >
-          <q-tooltip anchor="top middle" self="center middle">
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
             Income
           </q-tooltip>
         </q-route-tab>
@@ -61,7 +79,11 @@
           exact
           replace
         >
-          <q-tooltip anchor="top middle" self="center middle">
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
             Expenses
           </q-tooltip>
         </q-route-tab>
@@ -73,7 +95,11 @@
           exact
           replace
         >
-          <q-tooltip anchor="top middle" self="center middle">
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
             Investment
           </q-tooltip>
         </q-route-tab>
@@ -88,7 +114,11 @@
           exact
           replace
         >
-          <q-tooltip anchor="top middle" self="center middle">
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
             Profile
           </q-tooltip>
         </q-route-tab>
@@ -101,7 +131,11 @@
           exact
           replace
         >
-          <q-tooltip anchor="top middle" self="center middle">
+          <q-tooltip
+            anchor="top middle"
+            self="center middle"
+            class="bg-deep-purple-10 text-white"
+          >
             Profile
           </q-tooltip>
         </q-route-tab>

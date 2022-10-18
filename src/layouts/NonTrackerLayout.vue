@@ -11,7 +11,15 @@
             dense
             flat
             @click="onBack"
-          />
+          >
+            <q-tooltip
+              anchor="bottom middle"
+              self="center middle"
+              class="bg-deep-purple-10 text-white"
+            >
+              Back to previous page
+            </q-tooltip>
+          </q-btn>
         </div>
 
         <div class="col col-sm text-center">
