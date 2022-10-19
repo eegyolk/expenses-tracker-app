@@ -14,12 +14,18 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^10.1.2",
-    "cordova-ios": "^6.2.0"
+    "cordova-ios": "^6.2.0",
+    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-statusbar": "^3.0.0"
   },
   "cordova": {
     "platforms": [
       "ios",
       "android"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-dialogs": {}
+    }
   }
 }
