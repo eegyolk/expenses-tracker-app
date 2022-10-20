@@ -1,159 +1,171 @@
 <template>
-  <q-page class="flex flex-center">
-    <q-card flat class="my-card">
-      <q-card-section class="text-center">
-        <q-icon name="shopping_cart" color="deep-purple-13" size="4rem" />
-      </q-card-section>
+  <q-page v-if="visiblePage" class="q-pa-md flex flex-center">
+    <div class="row wrap justify-center full-width">
+      <img src="~assets/register-img.svg" style="width: 200px; height: 200px" />
 
-      <q-card-section class="q-gutter-md">
-        <div class="text-h6 text-center q-pt-lg">Create your account</div>
+      <div class="q-pt-md text-center" :style="{ width: `${windowWidth}px` }">
+        <span class="q-mx-md text-h6 text-weight-medium text-grey-9">
+          Create your account
+        </span>
+      </div>
 
-        <div class="q-gutter-md">
-          <div class="full-width">
-            <span>Full Name</span>
-            <q-input
-              v-model="fullName"
-              color="deep-purple-13"
-              placeholder="Your full name"
-              outlined
-              dense
-            />
-          </div>
-
-          <div class="full-width">
-            <span>Email Address</span>
-            <q-input
-              v-model="emailAddress"
-              color="deep-purple-13"
-              placeholder="Your email address"
-              type="email"
-              outlined
-              dense
-            />
-          </div>
-
-          <div class="full-width">
-            <span>Password</span>
-            <q-input
-              v-model="password"
-              color="deep-purple-13"
-              placeholder="Your password"
-              :type="passwordVisibility ? '' : 'password'"
-              outlined
-              dense
-            >
-              <template v-slot:append>
-                <q-icon
-                  class="cursor-pointer"
-                  :name="passwordVisibility ? 'visibility' : 'visibility_off'"
-                  @click="onTogglePasswordVisibility"
-                />
-              </template>
-            </q-input>
-          </div>
-
-          <div class="full-width text-center">
-            <q-toggle
-              v-model="acceptTOSAndPP"
-              color="deep-purple-13"
-              keep-color
-              dense
-            />
-
-            <span class="q-px-xs text-caption">I accept the</span>
-
-            <q-btn
-              label="Terms"
-              class="text-caption text-weight-bold"
-              color="deep-purple-13"
-              padding="none"
-              to="/terms"
-              no-caps
-              flat
-              unelavated
-            />
-
-            <span class="q-px-xs text-caption">and</span>
-
-            <q-btn
-              label="Privacy Policy"
-              class="text-caption text-weight-bold"
-              color="deep-purple-13"
-              padding="none"
-              to="/privacy-policy"
-              no-caps
-              flat
-              unelavated
-            />
-
-            <span class="text-caption">.</span>
-          </div>
-        </div>
-      </q-card-section>
-
-      <q-card-section class="text-center">
-        <q-btn
+      <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
+        <span class="q-mx-md text-body2 text-weight-medium text-grey-9">
+          Full Name
+        </span>
+        <q-input
+          v-model="fullName"
+          class="q-mx-md"
           color="deep-purple-13"
-          label="Register"
-          class="full-width"
-          no-caps
-          @click="onRegister"
+          placeholder="Your full name"
+          outlined
+          dense
         />
-      </q-card-section>
+      </div>
 
-      <q-separator class="q-my-sm" unset />
+      <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
+        <span class="q-mx-md text-body2 text-weight-medium text-grey-9">
+          Email Address
+        </span>
+        <q-input
+          v-model="emailAddress"
+          class="q-mx-md"
+          color="deep-purple-13"
+          placeholder="Your email address"
+          type="email"
+          outlined
+          dense
+        />
+      </div>
 
-      <q-card-section class="full-width text-center">
-        <span class="q-px-xs text-caption">Already have an account?</span>
+      <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
+        <span class="q-mx-md text-body2 text-weight-medium text-grey-9">
+          Password
+        </span>
+        <q-input
+          v-model="password"
+          class="q-mx-md"
+          color="deep-purple-13"
+          placeholder="Your password"
+          :type="passwordVisibility ? '' : 'password'"
+          outlined
+          dense
+        >
+          <template v-slot:append>
+            <q-icon
+              class="cursor-pointer"
+              :name="passwordVisibility ? 'visibility' : 'visibility_off'"
+              @click="onTogglePasswordVisibility"
+            />
+          </template>
+        </q-input>
+      </div>
+
+      <div
+        class="q-pt-md q-pt-lg text-center"
+        :style="{ width: `${windowWidth}px` }"
+      >
+        <q-toggle
+          v-model="acceptTOSAndPP"
+          color="deep-purple-13"
+          keep-color
+          dense
+        />
+
+        <span class="q-px-xs text-caption text-grey-9">I accept the</span>
 
         <q-btn
-          label="Login now."
+          label="Terms"
           class="text-caption text-weight-bold"
           color="deep-purple-13"
           padding="none"
-          to="/login"
+          to="/terms"
           no-caps
           flat
           unelavated
         />
-      </q-card-section>
-    </q-card>
+
+        <span class="q-px-xs text-caption text-grey-9">and</span>
+
+        <q-btn
+          label="Privacy Policy"
+          class="text-caption text-weight-bold"
+          color="deep-purple-13"
+          padding="none"
+          to="/privacy-policy"
+          no-caps
+          flat
+          unelavated
+        />
+
+        <span class="text-caption">.</span>
+      </div>
+    </div>
+
+    <div class="row wrap justify-center" :style="{ width: `${windowWidth}px` }">
+      <q-btn
+        class="full-width q-mb-lg"
+        color="deep-purple-13"
+        label="Register"
+        no-caps
+        @click="onRegister"
+      />
+
+      <span class="q-px-xs text-caption text-grey-9"
+        >Already have an account?</span
+      >
+
+      <q-btn
+        label="Login now."
+        class="text-caption text-weight-bold"
+        color="deep-purple-13"
+        padding="none"
+        to="/login"
+        no-caps
+        flat
+        unelavated
+      />
+    </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { supabase } from "boot/supabase";
-import AccountCreationApi from "src/api/account-creation-api";
+import { usePage } from "src/composables/page";
 
 export default defineComponent({
   name: "RegistrationPage",
 
   setup() {
+    const windowWidth = ref(0);
     const fullName = ref("");
     const emailAddress = ref("");
     const password = ref("");
     const passwordVisibility = ref(false);
     const acceptTOSAndPP = ref(false);
+    const { visiblePage } = usePage();
 
     const router = useRouter();
 
-    const api = new AccountCreationApi(supabase);
+    onMounted(() => {
+      windowWidth.value = window.innerWidth;
+    });
 
     return {
+      windowWidth,
       fullName,
       emailAddress,
       password,
       passwordVisibility,
       acceptTOSAndPP,
+      visiblePage,
 
       onTogglePasswordVisibility() {
         passwordVisibility.value = !passwordVisibility.value;
       },
 
       async onRegister() {
-        await api.signUp(emailAddress.value, password.value);
         router.push({ name: "verify-account" });
       },
     };
@@ -161,10 +173,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.my-card {
-  width: 100%;
-  max-width: 350px;
-  padding: 25px;
-}
-</style>
+<style lang="scss" scoped></style>
