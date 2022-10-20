@@ -124,6 +124,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
+import { supabase } from "boot/supabase";
+import AccountCreationApi from "src/api/account-creation-api";
 
 export default defineComponent({
   name: "RegistrationPage",
@@ -137,6 +139,8 @@ export default defineComponent({
 
     const router = useRouter();
 
+    const api = new AccountCreationApi(supabase);
+
     return {
       fullName,
       emailAddress,
@@ -148,7 +152,8 @@ export default defineComponent({
         passwordVisibility.value = !passwordVisibility.value;
       },
 
-      onRegister() {
+      async onRegister() {
+        await api.signUp(emailAddress.value, password.value);
         router.push({ name: "verify-account" });
       },
     };

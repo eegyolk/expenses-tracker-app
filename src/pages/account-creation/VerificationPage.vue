@@ -92,6 +92,8 @@
 <script>
 import { defineComponent, ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
+import { supabase } from "boot/supabase";
+import AccountCreationApi from "src/api/account-creation-api";
 
 export default defineComponent({
   name: "VerificationPage",
@@ -107,6 +109,8 @@ export default defineComponent({
     const codePart4 = ref("");
 
     const router = useRouter();
+
+    const api = new AccountCreationApi(supabase);
 
     onMounted(() => {
       codePart1Ref.value.focus();
@@ -153,8 +157,9 @@ export default defineComponent({
         ev.target.select();
       },
 
-      onVerify() {
-        router.push({ name: "tracker-home" });
+      async onVerify() {
+        await api.verifyOtp();
+        // router.push({ name: "tracker-home" });
       },
     };
   },
