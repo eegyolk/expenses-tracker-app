@@ -9,7 +9,7 @@ const routes = [
         component: () => import("pages/IndexPage.vue"),
         meta: {
           withBackButton: false,
-          title: "Welcome",
+          title: "",
         },
       },
     ],
