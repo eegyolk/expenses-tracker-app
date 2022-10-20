@@ -18,7 +18,7 @@ export function usePage() {
     timer = setTimeout(() => {
       $q.loading.hide();
       visiblePage.value = true;
-    }, 1000);
+    }, 500);
   });
 
   onBeforeUnmount(() => {
