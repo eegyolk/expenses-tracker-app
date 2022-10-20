@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="visiblePage" class="q-pa-md flex flex-center grad">
+  <q-page v-if="visiblePage" class="q-pa-md flex flex-center">
     <div class="row wrap justify-center full-width">
       <q-card flat>
         <q-carousel
@@ -131,21 +131,21 @@ export default defineComponent({
   name: "IndexPage",
 
   setup() {
-    const windowWidth = ref(0);
     const windowHeight = ref(0);
+    const windowWidth = ref(0);
     const carouselPage = ref("home");
 
     const { visiblePage } = usePage();
 
     onMounted(() => {
-      windowWidth.value = window.innerWidth;
       windowHeight.value = window.innerHeight;
+      windowWidth.value = window.innerWidth;
     });
 
     return {
       visiblePage,
-      windowWidth,
       windowHeight,
+      windowWidth,
       carouselPage,
     };
   },
