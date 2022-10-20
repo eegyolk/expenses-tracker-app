@@ -19,9 +19,11 @@
                 style="width: 200px; height: 200px"
               />
 
-              <div class="text-h6 q-pt-lg">Be SMART with your MONEY...</div>
+              <div class="text-h6 text-grey-9 q-pt-lg">
+                Be SMART with your MONEY...
+              </div>
 
-              <div class="text-caption q-py-md">
+              <div class="text-caption text-grey-9 q-py-md">
                 Keep track of your income, expenditure, investment and savings.
                 Learn how to handle your finances and regain control of your
                 life.
@@ -36,9 +38,9 @@
                 style="width: 200px; height: 200px"
               />
 
-              <div class="text-h6 q-pt-lg">Income</div>
+              <div class="text-h6 text-grey-9 q-pt-lg">Income</div>
 
-              <div class="text-caption q-py-md">
+              <div class="text-caption text-grey-9 q-py-md">
                 Income is money that an individual or business receives in
                 exchange for providing labor, producing a good or service or
                 investing capital.
@@ -53,9 +55,9 @@
                 style="width: 200px; height: 200px"
               />
 
-              <div class="text-h6 q-pt-lg">Expenses</div>
+              <div class="text-h6 text-grey-9 q-pt-lg">Expenses</div>
 
-              <div class="text-caption q-py-md">
+              <div class="text-caption text-grey-9 q-py-md">
                 An expense is a type of expenditure that flows through the
                 income statement and is deducted from revenue to arrive at net
                 income.
@@ -73,9 +75,9 @@
                 style="width: 200px; height: 200px"
               />
 
-              <div class="text-h6 q-pt-lg">Investment</div>
+              <div class="text-h6 text-grey-9 q-pt-lg">Investment</div>
 
-              <div class="text-caption q-py-md">
+              <div class="text-caption text-grey-9 q-py-md">
                 Investing can provide you with another source of income, fund
                 your retirement or even get you out of a financial jam.
               </div>
@@ -89,9 +91,9 @@
                 style="width: 200px; height: 200px"
               />
 
-              <div class="text-h6 q-pt-lg">Savings</div>
+              <div class="text-h6 text-grey-9 q-pt-lg">Savings</div>
 
-              <div class="text-caption q-py-md">
+              <div class="text-caption text-grey-9 q-py-md">
                 Savings can also mean it is for money management such as savings
                 for debit payments. This is a good tip that can help you avoid
                 drowning in debt as well.
