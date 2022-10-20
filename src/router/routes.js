@@ -27,7 +27,7 @@ const routes = [
           import("src/pages/account-creation/RegistrationPage.vue"),
         meta: {
           withBackButton: true,
-          title: "Registration",
+          title: "",
         },
       },
     ],
