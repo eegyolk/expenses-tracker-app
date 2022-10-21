@@ -1,7 +1,10 @@
 <template>
   <q-page v-if="visiblePage" class="q-pa-md flex flex-center">
     <div class="row wrap justify-center full-width">
-      <img src="~assets/register-img.svg" style="width: 200px; height: 200px" />
+      <img
+        src="~assets/account-creation-register-img.svg"
+        style="width: 200px; height: 200px"
+      />
 
       <div class="q-pt-md text-center" :style="{ width: `${windowWidth}px` }">
         <span class="text-h6 text-weight-medium text-grey-9">
@@ -182,6 +185,7 @@ export default defineComponent({
     const $q = useQuasar();
 
     return {
+      visiblePage,
       windowWidth,
       fullName,
       fullNameHasError,
@@ -191,7 +195,6 @@ export default defineComponent({
       passwordHasError,
       passwordVisibility,
       acceptTOSAndPP,
-      visiblePage,
 
       onTogglePasswordVisibility() {
         accountCreationStore.togglePasswordVisibility();
@@ -199,7 +202,7 @@ export default defineComponent({
 
       async onRegister() {
         try {
-          const notify = accountCreationStore.validateFields();
+          const notify = accountCreationStore.validateFields("REGISTER");
           if (notify) {
             $q.notify({
               type: "negative",
