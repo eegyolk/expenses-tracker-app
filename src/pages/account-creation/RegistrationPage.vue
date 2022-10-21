@@ -10,20 +10,35 @@
       </div>
 
       <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
-        <span class="text-body2 text-weight-medium text-grey-9">
+        <span
+          :class="{
+            'text-body2': true,
+            'text-grey-9': !fullNameHasError,
+            'text-red-10': fullNameHasError,
+          }"
+        >
           Full Name
         </span>
         <q-input
           v-model="fullName"
           color="deep-purple-13"
           placeholder="Your full name"
+          :error="fullNameHasError"
+          hide-bottom-space
+          no-error-icon
           outlined
           dense
         />
       </div>
 
       <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
-        <span class="text-body2 text-weight-medium text-grey-9">
+        <span
+          :class="{
+            'text-body2': true,
+            'text-grey-9': !emailAddressHasError,
+            'text-red-10': emailAddressHasError,
+          }"
+        >
           Email Address
         </span>
         <q-input
@@ -31,13 +46,22 @@
           color="deep-purple-13"
           placeholder="Your email address"
           type="email"
+          :error="emailAddressHasError"
+          hide-bottom-space
+          no-error-icon
           outlined
           dense
         />
       </div>
 
       <div class="q-pt-md text-left" :style="{ width: `${windowWidth}px` }">
-        <span class="text-body2 text-weight-medium text-grey-9">
+        <span
+          :class="{
+            'text-body2': true,
+            'text-grey-9': !passwordHasError,
+            'text-red-10': passwordHasError,
+          }"
+        >
           Password
         </span>
         <q-input
@@ -45,6 +69,9 @@
           color="deep-purple-13"
           placeholder="Your password"
           :type="passwordVisibility ? '' : 'password'"
+          :error="passwordHasError"
+          hide-bottom-space
+          no-error-icon
           outlined
           dense
         >
@@ -128,43 +155,64 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
+import { storeToRefs } from "pinia";
 import { usePage } from "src/composables/page";
+import { useAccountCreationStore } from "stores/account-creation-store";
 
 export default defineComponent({
   name: "RegistrationPage",
 
   setup() {
-    const windowWidth = ref(0);
-    const fullName = ref("");
-    const emailAddress = ref("");
-    const password = ref("");
-    const passwordVisibility = ref(false);
-    const acceptTOSAndPP = ref(false);
-    const { visiblePage } = usePage();
-
+    const { visiblePage, windowWidth } = usePage();
+    const accountCreationStore = useAccountCreationStore();
+    const {
+      fullName,
+      fullNameHasError,
+      emailAddress,
+      emailAddressHasError,
+      password,
+      passwordHasError,
+      passwordVisibility,
+      acceptTOSAndPP,
+    } = storeToRefs(accountCreationStore);
     const router = useRouter();
-
-    onMounted(() => {
-      windowWidth.value = window.innerWidth;
-    });
+    const $q = useQuasar();
 
     return {
       windowWidth,
       fullName,
+      fullNameHasError,
       emailAddress,
+      emailAddressHasError,
       password,
+      passwordHasError,
       passwordVisibility,
       acceptTOSAndPP,
       visiblePage,
 
       onTogglePasswordVisibility() {
-        passwordVisibility.value = !passwordVisibility.value;
+        accountCreationStore.togglePasswordVisibility();
       },
 
       async onRegister() {
-        router.push({ name: "verify-account" });
+        try {
+          const notify = accountCreationStore.validateFields();
+          if (notify) {
+            $q.notify({
+              type: "negative",
+              message: notify.errorMessage,
+              html: notify.isHtml,
+              multiLine: true,
+            });
+          }
+
+          // router.push({ name: "verify-account" });
+        } catch (err) {
+          console.log(err);
+        }
       },
     };
   },
