@@ -169,7 +169,7 @@ export default defineComponent({
   name: "RegistrationPage",
 
   setup() {
-    const { visiblePage, windowWidth } = usePage();
+    const { visiblePage, windowWidth, showLoading, hideLoading } = usePage();
     const accountCreationStore = useAccountCreationStore();
     const {
       fullName,
@@ -202,6 +202,8 @@ export default defineComponent({
 
       async onRegister() {
         try {
+          showLoading();
+
           const notify = accountCreationStore.validateFields("REGISTER");
           if (notify) {
             $q.notify({
@@ -212,7 +214,7 @@ export default defineComponent({
             return;
           }
 
-          const isSuccess = accountCreationStore.register();
+          const isSuccess = await accountCreationStore.register();
           if (!isSuccess) {
             $q.notify({
               type: "negative",
@@ -223,12 +225,15 @@ export default defineComponent({
           }
 
           router.push({ name: "verify-account" });
+          return;
         } catch (err) {
           $q.notify({
             type: "negative",
             message:
               "Something went wrong while processing your registration. Please contact our support team, sorry for the inconvenience.",
           });
+        } finally {
+          hideLoading();
         }
       },
     };
