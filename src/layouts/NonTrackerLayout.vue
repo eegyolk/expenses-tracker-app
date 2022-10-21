@@ -1,9 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header v-if="backButtonVisibility" class="bg-white">
+    <q-header v-if="backButtonVisibility || getTitle" class="bg-white">
       <q-toolbar>
         <div class="col-1 col-sm-1">
           <q-btn
+            v-if="backButtonVisibility"
             color="deep-purple-13"
             icon="chevron_left"
             aria-label="Back"
