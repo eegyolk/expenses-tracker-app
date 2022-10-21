@@ -126,29 +126,21 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 import { usePage } from "src/composables/page";
 
 export default defineComponent({
   name: "IndexPage",
 
   setup() {
-    const windowHeight = ref(0);
-    const windowWidth = ref(0);
     const carouselPage = ref("home");
-
-    const { visiblePage } = usePage();
-
-    onMounted(() => {
-      windowHeight.value = window.innerHeight;
-      windowWidth.value = window.innerWidth;
-    });
+    const { visiblePage, windowHeight, windowWidth } = usePage();
 
     return {
+      carouselPage,
       visiblePage,
       windowHeight,
       windowWidth,
-      carouselPage,
     };
   },
 });
