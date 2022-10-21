@@ -1,29 +1,26 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-deep-purple-13" elevated>
+    <q-header v-if="backButtonVisibility" class="bg-white">
       <q-toolbar>
         <div class="col-1 col-sm-1">
           <q-btn
-            v-if="backButtonVisibility"
-            icon="west"
+            color="deep-purple-13"
+            icon="chevron_left"
             aria-label="Back"
             round
             dense
             flat
             @click="onBack"
-          >
-            <q-tooltip
-              anchor="bottom middle"
-              self="center middle"
-              class="bg-deep-purple-10 text-white"
-            >
-              Back to previous page
-            </q-tooltip>
-          </q-btn>
+          />
         </div>
 
         <div class="col col-sm text-center">
-          <span class="text-h6">{{ getTitle }}</span>
+          <span
+            v-if="getTitle"
+            class="text-subtitle1 text-weight-medium text-deep-purple-13"
+          >
+            {{ getTitle }}
+          </span>
         </div>
 
         <div class="col-1 col-sm-1"></div>
