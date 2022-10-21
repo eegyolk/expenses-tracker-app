@@ -1,16 +1,29 @@
 export default class AccountCreationApi {
+  /**
+   *
+   * @param {*} supabase
+   */
   constructor(supabase) {
     this.supabase = supabase;
   }
 
-  async signUp(email, password) {
-    const { data, error } = await this.supabase.auth.signUp({
-      email,
+  /**
+   *
+   * @param {*} fullName
+   * @param {*} emailAddress
+   * @param {*} password
+   * @returns { data, error} Object
+   */
+  async signUp(fullName, emailAddress, password) {
+    return await this.supabase.auth.signUp({
+      email: emailAddress,
       password,
+      options: {
+        data: {
+          fullName,
+        },
+      },
     });
-
-    console.log(111, data);
-    console.log(222, error);
   }
 
   async verifyOtp() {

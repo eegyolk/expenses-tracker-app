@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { supabase } from "src/boot/supabase";
+import AccountCreationApi from "src/api/account-creation-api";
 
 export const useAccountCreationStore = defineStore("accountCreation", () => {
   const fullName = ref("");
@@ -10,6 +12,7 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
   const passwordHasError = ref(false);
   const passwordVisibility = ref(false);
   const acceptTOSAndPP = ref(false);
+
   const codePart1 = ref("");
   const codePart2 = ref("");
   const codePart3 = ref("");
@@ -17,10 +20,16 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
   const codePart5 = ref("");
   const codePart6 = ref("");
 
+  const api = new AccountCreationApi(supabase);
+
   const togglePasswordVisibility = () => {
     passwordVisibility.value = !passwordVisibility.value;
   };
 
+  /**
+   *
+   * @returns { errorMessage, isHtml } Object
+   */
   const validateFields = () => {
     if (!fullName.value) {
       fullNameHasError.value = true;
@@ -104,10 +113,23 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
     }
   };
 
+  /**
+   *
+   * @returns Boolean
+   */
   const register = async () => {
-    try {
-    } catch (err) {
-      throw err;
+    const { data, error } = await api.signUp(
+      fullName.value,
+      emailAddress.value,
+      password.value
+    );
+
+    if (data) {
+      return true;
+    }
+
+    if (error) {
+      return false;
     }
   };
 
@@ -151,6 +173,7 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
     passwordHasError,
     passwordVisibility,
     acceptTOSAndPP,
+
     codePart1,
     codePart2,
     codePart3,
@@ -160,6 +183,7 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
     togglePasswordVisibility,
     validateFields,
     register,
+
     resend,
     verify,
     clearRegistration,

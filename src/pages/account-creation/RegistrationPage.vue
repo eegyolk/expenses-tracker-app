@@ -205,13 +205,27 @@ export default defineComponent({
               type: "negative",
               message: notify.errorMessage,
               html: notify.isHtml,
-              multiLine: true,
             });
+            return;
           }
 
-          // router.push({ name: "verify-account" });
+          const isSuccess = accountCreationStore.register();
+          if (!isSuccess) {
+            $q.notify({
+              type: "negative",
+              message:
+                "Something went wrong while processing your registration. Please contact our support team, sorry for the inconvenience.",
+            });
+            return;
+          }
+
+          router.push({ name: "verify-account" });
         } catch (err) {
-          console.log(err);
+          $q.notify({
+            type: "negative",
+            message:
+              "Something went wrong while processing your registration. Please contact our support team, sorry for the inconvenience.",
+          });
         }
       },
     };
