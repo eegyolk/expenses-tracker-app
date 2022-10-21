@@ -62,6 +62,7 @@
           no-caps
           flat
           unelavated
+          @click="onResend"
         />
       </div>
     </div>
@@ -80,9 +81,9 @@ export default defineComponent({
   name: "VerificationPage",
 
   setup() {
-    const { visiblePage, windowWidth } = usePage();
+    const { visiblePage, windowWidth, showLoading, hideLoading } = usePage();
     const accountCreationStore = useAccountCreationStore();
-    const { emailAddress, code, codeHasError } =
+    const { emailAddress, password, code, codeHasError } =
       storeToRefs(accountCreationStore);
     const router = useRouter();
     const $q = useQuasar();
@@ -91,11 +92,14 @@ export default defineComponent({
       visiblePage,
       windowWidth,
       emailAddress,
+      password,
       code,
       codeHasError,
 
       async onVerify() {
         try {
+          showLoading();
+
           const notify = accountCreationStore.validateFields("VERIFY");
           if (notify) {
             $q.notify({
@@ -106,7 +110,7 @@ export default defineComponent({
             return;
           }
 
-          const isSuccess = accountCreationStore.verify();
+          const isSuccess = await accountCreationStore.verify();
           if (!isSuccess) {
             $q.notify({
               type: "negative",
@@ -116,14 +120,43 @@ export default defineComponent({
             return;
           }
 
-          // TODO
-          // router.push({ name: "tracker-home" });
+          router.replace({ name: "tracker-home" });
+
+          accountCreationStore.resetData();
+
+          return;
         } catch (err) {
           $q.notify({
             type: "negative",
             message:
               "Something went wrong while processing your verification. Please contact our support team, sorry for the inconvenience.",
           });
+        } finally {
+          hideLoading();
+        }
+      },
+
+      async onResend() {
+        try {
+          showLoading();
+
+          const isSuccess = await accountCreationStore.resend();
+
+          if (!isSuccess) {
+            $q.notify({
+              type: "negative",
+              message:
+                "Something went wrong while processing code resend. Please contact our support team, sorry for the inconvenience.",
+            });
+          }
+        } catch (err) {
+          $q.notify({
+            type: "negative",
+            message:
+              "Something went wrong while processing code resend. Please contact our support team, sorry for the inconvenience.",
+          });
+        } finally {
+          hideLoading();
         }
       },
     };
@@ -131,15 +164,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.my-card {
-  width: 100%;
-  max-width: 350px;
-  padding: 25px;
-}
-
-.code-parts {
-  width: 40px;
-  display: inline-block;
-}
-</style>
+<style lang="scss" scoped></style>

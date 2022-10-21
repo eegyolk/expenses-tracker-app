@@ -224,7 +224,7 @@ export default defineComponent({
             return;
           }
 
-          router.push({ name: "verify-account" });
+          router.replace({ name: "verify-account" });
           return;
         } catch (err) {
           $q.notify({
