@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { LocalStorage } from "quasar";
 import { supabase } from "src/boot/supabase";
 import AccountCreationApi from "src/api/account-creation-api";
 
@@ -166,11 +165,6 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
     }
 
     if (data) {
-      LocalStorage.set(
-        process.env.LOCALSTORAGE_JWT_AUTH_KEY,
-        data.access_token
-      );
-
       return true;
     }
   };
