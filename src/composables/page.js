@@ -9,6 +9,19 @@ export function usePage() {
   let timer;
   const $q = useQuasar();
 
+  const showLoading = (backgroundColor = "grey-6") => {
+    $q.loading.show({
+      spinner: QSpinnerIos,
+      spinnerColor: "deep-purple-13",
+      spinnerSize: "md",
+      backgroundColor,
+    });
+  };
+
+  const hideLoading = () => {
+    $q.loading.hide();
+  };
+
   onMounted(() => {
     windowHeight.value = window.innerHeight;
     windowWidth.value = window.innerWidth;
@@ -32,5 +45,11 @@ export function usePage() {
     }
   });
 
-  return { visiblePage, windowHeight, windowWidth };
+  return {
+    visiblePage,
+    windowHeight,
+    windowWidth,
+    showLoading,
+    hideLoading,
+  };
 }
