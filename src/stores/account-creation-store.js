@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { LocalStorage } from "quasar";
 import { supabase } from "src/boot/supabase";
 import AccountCreationApi from "src/api/account-creation-api";
 
@@ -144,12 +145,12 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
       password.value
     );
 
-    if (data) {
-      return true;
-    }
-
     if (error) {
       return false;
+    }
+
+    if (data) {
+      return true;
     }
   };
 
@@ -160,32 +161,51 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
   const verify = async () => {
     const { data, error } = await api.verifyOtp(emailAddress.value, code.value);
 
+    if (error) {
+      return false;
+    }
+
     if (data) {
+      LocalStorage.set(
+        process.env.LOCALSTORAGE_JWT_AUTH_KEY,
+        data.access_token
+      );
+
       return true;
     }
+  };
+
+  /**
+   * Same functionality as register
+   * @returns Boolean
+   */
+  const resend = async () => {
+    const { data, error } = await api.signUp(
+      fullName.value,
+      emailAddress.value,
+      password.value
+    );
 
     if (error) {
       return false;
     }
+
+    if (data) {
+      return true;
+    }
   };
 
-  const resend = async () => {};
-
-  const clearRegistration = () => {
+  const resetData = () => {
     fullName.value = "";
+    fullNameHasError.value = false;
     emailAddress.value = "";
+    emailAddressHasError.value = false;
     password.value = "";
+    passwordHasError.value = false;
     passwordVisibility.value = false;
     acceptTOSAndPP.value = false;
-  };
-
-  const clearCode = () => {
-    codePart1.value = "";
-    codePart2.value = "";
-    codePart3.value = "";
-    codePart4.value = "";
-    codePart5.value = "";
-    codePart6.value = "";
+    code.value = "";
+    codeHasError.value = false;
   };
 
   return {
@@ -204,8 +224,6 @@ export const useAccountCreationStore = defineStore("accountCreation", () => {
     register,
     verify,
     resend,
-
-    clearRegistration,
-    clearCode,
+    resetData,
   };
 });
