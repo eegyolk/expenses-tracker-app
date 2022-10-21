@@ -12,7 +12,7 @@ export default class AccountCreationApi {
    * @param {*} fullName
    * @param {*} emailAddress
    * @param {*} password
-   * @returns { data, error} Object
+   * @returns { data, error } Object
    */
   async signUp(fullName, emailAddress, password) {
     return await this.supabase.auth.signUp({
@@ -26,14 +26,17 @@ export default class AccountCreationApi {
     });
   }
 
-  async verifyOtp() {
-    const { data, error } = await this.supabase.auth.verifyOtp({
-      email: "eegyolk@gmail.com",
-      token: "063765",
+  /**
+   *
+   * @param {*} emailAddress
+   * @param {*} code
+   * @returns { data, error } Object
+   */
+  async verifyOtp(emailAddress, code) {
+    return await this.supabase.auth.verifyOtp({
+      email: emailAddress,
+      token: code,
       type: "signup",
     });
-
-    console.log(333, data);
-    console.log(444, error);
   }
 }
