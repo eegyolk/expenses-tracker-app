@@ -95,7 +95,7 @@ const routes = [
         component: () => import("src/pages/authentication/LoginPage.vue"),
         meta: {
           withBackButton: true,
-          title: "Sign In",
+          title: "",
         },
       },
     ],
